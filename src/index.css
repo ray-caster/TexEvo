@@ -1,0 +1,570 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    /* Brand Colors - From Screenshots */
+    --emerald-primary: #2D7A5F;
+    --emerald-dark: #1E5A43;
+    --emerald-light: #3D9A7F;
+    --coral-primary: #D88B6F;
+    --coral-light: #E89A7F;
+
+    /* Layered Background System - Creating depth with multiple shades */
+    --bg-page: #F5EDE3;
+    /* Base layer */
+    --bg-section: #F0E8DD;
+    /* 0.1 lighter than base */
+    --bg-card: #F8F2EA;
+    /* 0.2 lighter than base */
+    --bg-elevated: #FDF9F4;
+    /* 0.3 lighter than base */
+    --bg-white: #FFFFFF;
+    /* Lightest layer */
+    --bg-dark: #2A2A2A;
+    /* Dark base */
+    --bg-dark-elevated: #3A3A3A;
+    /* Dark elevated */
+
+    /* Text Colors with proper hierarchy */
+    --text-primary: #1A2D26;
+    /* Darkest for primary text */
+    --text-secondary: #2D4A3E;
+    /* Medium dark */
+    --text-muted: #5A6B60;
+    /* Muted */
+    --text-light: #8A9B90;
+    /* Lightest text */
+
+    /* Border System - Multiple depths */
+    --border-subtle: #E8DFD3;
+    /* Lightest border */
+    --border-medium: #D0C4B4;
+    /* Medium border */
+    --border-strong: #B8A896;
+    /* Strong border */
+    --border-accent: #2D7A5F;
+    /* Accent border */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--bg-page);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom animations */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: translateY(-20px);
+        opacity: 0.8;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-shimmer {
+    animation: shimmer 2s infinite;
+}
+
+/* Advanced Depth System - Layered Cards */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Small shadow - Level 1 depth */
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+        /* Light inset top */
+        0 1px 3px rgba(26, 45, 38, 0.08),
+        /* Dark shadow bottom */
+        0 2px 6px rgba(26, 45, 38, 0.04);
+    /* Soft spread */
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    background: var(--bg-elevated);
+    border-color: var(--border-medium);
+
+    /* Medium shadow on hover - Level 2 depth */
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        0 4px 8px rgba(26, 45, 38, 0.12),
+        0 8px 16px rgba(26, 45, 38, 0.08);
+}
+
+.card-elevated {
+    background: var(--bg-elevated);
+    border-color: var(--border-medium);
+
+    /* Big shadow - Level 3 depth */
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        0 6px 12px rgba(26, 45, 38, 0.15),
+        0 12px 24px rgba(26, 45, 38, 0.10);
+}
+
+.card-elevated:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 1),
+        0 8px 16px rgba(26, 45, 38, 0.18),
+        0 16px 32px rgba(26, 45, 38, 0.12);
+}
+
+/* Sleek outline for important elements */
+.outline-sleek {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    transition: outline-color 0.2s;
+}
+
+.outline-sleek:focus,
+.outline-sleek:hover {
+    outline-color: var(--emerald-primary);
+}
+
+/* Advanced Progress Bar with Depth */
+.progress-bar {
+    position: relative;
+    height: 32px;
+    background: var(--bg-section);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+
+    /* Inset shadow to create depth */
+    box-shadow:
+        inset 0 2px 4px rgba(26, 45, 38, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #2D7A5F 0%, #3D9A7F 50%, #D88B6F 100%);
+    border-radius: 16px;
+    position: relative;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Elevated progress bar */
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        0 2px 4px rgba(45, 122, 95, 0.2);
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), transparent);
+    border-radius: 16px 16px 0 0;
+}
+
+/* Advanced Team Avatar System */
+.team-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Multi-layered shadow system */
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        0 4px 8px rgba(26, 45, 38, 0.12),
+        0 0 0 4px var(--bg-elevated),
+        0 0 0 5px var(--border-subtle);
+}
+
+.team-avatar:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        0 6px 12px rgba(26, 45, 38, 0.15),
+        0 0 0 4px var(--bg-elevated),
+        0 0 0 5px var(--border-medium);
+}
+
+.team-avatar-primary {
+    background: linear-gradient(135deg, var(--emerald-primary), var(--emerald-dark));
+}
+
+.team-avatar-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+    pointer-events: none;
+}
+
+.team-avatar-secondary {
+    background: linear-gradient(135deg, var(--coral-primary), var(--coral-light));
+}
+
+.team-avatar-secondary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+    pointer-events: none;
+}
+
+/* Advanced Icon Container with Depth */
+.icon-card {
+    background: linear-gradient(135deg, var(--emerald-primary), var(--emerald-dark));
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* Multi-layered depth system */
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+        0 4px 8px rgba(45, 122, 95, 0.15),
+        0 8px 16px rgba(45, 122, 95, 0.2);
+}
+
+.icon-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+    pointer-events: none;
+}
+
+/* Advanced Button System with Layered Depth */
+.btn {
+    padding: 0.875rem 2rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    outline: none;
+    position: relative;
+
+    /* Level 1 depth - small shadow */
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        0 2px 4px rgba(26, 45, 38, 0.08),
+        0 4px 8px rgba(26, 45, 38, 0.06);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+
+    /* Level 2 depth - medium shadow */
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        0 4px 8px rgba(26, 45, 38, 0.12),
+        0 8px 16px rgba(26, 45, 38, 0.08);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow:
+        inset 0 2px 4px rgba(26, 45, 38, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--coral-primary), var(--coral-light));
+    color: white;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--coral-light), #F0A080);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: white;
+}
+
+.btn-outline {
+    background: var(--bg-elevated);
+    color: var(--emerald-primary);
+    border-color: var(--emerald-primary);
+}
+
+.btn-outline:hover {
+    background: var(--emerald-primary);
+    color: white;
+    border-color: var(--emerald-primary);
+}
+
+/* Layered Section Backgrounds */
+.section-beige {
+    background-color: var(--bg-page);
+    position: relative;
+}
+
+.section-beige::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, var(--bg-section) 0%, var(--bg-page) 100%);
+    z-index: -1;
+}
+
+.section-light {
+    background-color: var(--bg-section);
+    position: relative;
+}
+
+.section-light::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-section) 100%);
+    z-index: -1;
+}
+
+.section-white {
+    background-color: var(--bg-white);
+    position: relative;
+}
+
+.section-white::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg-white) 100%);
+    z-index: -1;
+}
+
+.section-dark-green {
+    background: linear-gradient(135deg, #2D7A5F, #1E5A43);
+    position: relative;
+}
+
+.section-dark-green::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+    z-index: 0;
+}
+
+/* Stats Cards */
+.stat-card {
+    background: var(--bg-white);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    border: 1px solid var(--border-subtle);
+    box-shadow:
+        0 2px 4px rgba(45, 74, 62, 0.04),
+        0 6px 12px rgba(45, 74, 62, 0.06),
+        0 12px 24px rgba(45, 74, 62, 0.08);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--emerald-primary), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.stat-card:hover::before {
+    opacity: 1;
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+        0 4px 8px rgba(45, 74, 62, 0.08),
+        0 12px 24px rgba(45, 74, 62, 0.12),
+        0 24px 48px rgba(45, 74, 62, 0.16);
+}
+
+/* Numbered Steps */
+.step-number {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--emerald-primary), var(--emerald-dark));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    position: absolute;
+    top: -28px;
+    left: -28px;
+    box-shadow:
+        0 4px 8px rgba(45, 122, 95, 0.2),
+        0 8px 16px rgba(45, 122, 95, 0.15),
+        0 0 0 4px var(--bg-white),
+        0 0 0 5px var(--border-subtle);
+}
+
+/* Vision/Mission Cards with colored borders */
+.vision-card {
+    border-top: 4px solid #4FC3F7;
+}
+
+.mission-card {
+    border-top: 4px solid #F06292;
+}
+
+/* Footer */
+.footer-dark {
+    background: linear-gradient(135deg, #2A2A2A, #1A1A1A);
+    color: #E0E0E0;
+}
+
+/* Advanced Shadow System - Multiple Depth Levels */
+.shadow-depth-1 {
+    /* Small shadow - Level 1 */
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        0 1px 2px rgba(26, 45, 38, 0.06),
+        0 2px 4px rgba(26, 45, 38, 0.04);
+}
+
+.shadow-depth-2 {
+    /* Medium shadow - Level 2 */
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+        0 2px 4px rgba(26, 45, 38, 0.08),
+        0 4px 8px rgba(26, 45, 38, 0.06);
+}
+
+.shadow-depth-3 {
+    /* Big shadow - Level 3 */
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        0 4px 8px rgba(26, 45, 38, 0.12),
+        0 8px 16px rgba(26, 45, 38, 0.08);
+}
+
+.shadow-depth-4 {
+    /* Extra big shadow - Level 4 */
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        0 8px 16px rgba(26, 45, 38, 0.15),
+        0 16px 32px rgba(26, 45, 38, 0.10);
+}
+
+/* Inset shadows for depressed elements */
+.shadow-inset {
+    box-shadow:
+        inset 0 2px 4px rgba(26, 45, 38, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Navigation specific depth */
+.nav-depth {
+    background: var(--bg-elevated);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-subtle);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.7),
+        0 1px 3px rgba(26, 45, 38, 0.05),
+        0 2px 6px rgba(26, 45, 38, 0.03);
+}
+
+/* Glass Effect for Dark Sections */
+.glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+}
+
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.18);
+}
